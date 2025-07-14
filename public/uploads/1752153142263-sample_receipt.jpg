@@ -1,0 +1,33 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+  <text x="200" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#6c757d">
+    Coffee Shop Receipt
+  </text>
+  <text x="200" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#6c757d">
+    First Date Memory
+  </text>
+  <line x1="50" y1="100" x2="350" y2="100" stroke="#dee2e6" stroke-width="1"/>
+  
+  <text x="60" y="130" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    2x Coffee Latte - $8.50
+  </text>
+  <text x="60" y="150" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    1x Chocolate Croissant - $4.25
+  </text>
+  <text x="60" y="170" font-family="Arial, sans-serif" font-size="12" fill="#333">
+    Tax - $0.75
+  </text>
+  
+  <line x1="50" y1="190" x2="350" y2="190" stroke="#dee2e6" stroke-width="1"/>
+  
+  <text x="60" y="210" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">
+    Total: $13.50
+  </text>
+  
+  <text x="200" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6c757d">
+    Thank you for visiting!
+  </text>
+  <text x="200" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6c757d">
+    The beginning of something beautiful ❤️
+  </text>
+</svg> 

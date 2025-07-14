@@ -1,0 +1,27 @@
+# Dependencies
+/node_modules
+/backend/venv
+/backend/__pycache__
+
+# Docker
+.docker/
+
+# Build artifacts
+/build
+/dist
+*.local
+
+# Environment variables
+.env
+.env.*
+
+# IDE settings
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Uploads
+/backend/uploads/
