@@ -13,6 +13,9 @@ interface MemoryRow extends RowDataPacket {
 export async function GET(request: Request, { params }: { params: { day: string } }) {
   try {
     const day = params.day;
+    const url = new URL(request.url);
+    const isPreview = url.searchParams.get('preview') === 'true';
+    
     const connection = await mysql.createConnection(process.env.DATABASE_URL!);
     const [rows] = await connection.execute<MemoryRow[]>(
       `SELECT m.day_number, m.release_date, m.display_settings, mb.block_type, mb.content, mb.formatting, mb.sort_order
@@ -25,6 +28,17 @@ export async function GET(request: Request, { params }: { params: { day: string 
     await connection.end();
 
     if (Array.isArray(rows) && rows.length > 0) {
+      // Check if memory is unlocked (unless it's a preview request)
+      if (!isPreview) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Reset time to beginning of day for fair comparison
+        const releaseDate = new Date(rows[0].release_date);
+        releaseDate.setHours(0, 0, 0, 0);
+        
+        if (releaseDate > today) {
+          return NextResponse.json({ error: 'Memory not yet unlocked' }, { status: 403 });
+        }
+      }
       let display_settings = rows[0].display_settings;
       if (display_settings && typeof display_settings === 'string') {
         try {
