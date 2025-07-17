@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ${{ secrets.AWS_ECR_REGISTRY }}
-      IMAGE_NAME: 25days
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -43,5 +42,5 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max 
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.TAG }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/:${{ steps.vars.outputs.TAG }}
+            ${{ env.REGISTRY }}/:latest
