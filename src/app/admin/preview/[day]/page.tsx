@@ -20,7 +20,7 @@ export default function PreviewPage() {
 
   useEffect(() => {
     if (day) {
-      fetch(`/api/memories/${day}`)
+      fetch(`/api/memories/${day}?preview=true`)
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {
