@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS memories (
 CREATE TABLE IF NOT EXISTS memory_blocks (
   id INT PRIMARY KEY AUTO_INCREMENT,
   memory_id INT NOT NULL,
-  block_type ENUM('title', 'paragraph', 'image', 'quote', 'highlight') NOT NULL,
+  block_type ENUM('title', 'paragraph', 'image', 'media', 'quote', 'highlight') NOT NULL,
   content TEXT NOT NULL,
   formatting JSON,
   sort_order INT NOT NULL,
@@ -30,6 +30,6 @@ INSERT INTO memories (day_number, release_date) VALUES
 -- Example content for Day 1
 INSERT INTO memory_blocks (memory_id, block_type, content, sort_order) VALUES
 (1, 'title', 'Our First Day', 0),
-(1, 'image', '/uploads/1752153142263-sample_receipt.jpg', 1),
+(1, 'media', '/uploads/1752153142263-sample_receipt.jpg', 1),
 (1, 'paragraph', 'Remember this? The very first time we went out for a coffee. It was a bit awkward, but also perfect.', 2),
 (1, 'quote', '"I think I''m falling for you."', 3);

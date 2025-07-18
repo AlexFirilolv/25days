@@ -6,9 +6,9 @@ import { useRouter } from 'next/navigation';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { Block as ApiBlock } from '@/app/components/BlockRenderer';
 import RichTextEditor, { TextFormatting } from '@/app/components/RichTextEditor';
-import ImageEditor from '@/app/components/ImageEditor';
+import MediaEditor from '@/app/components/MediaEditor';
 
-type BlockType = 'title' | 'paragraph' | 'image' | 'quote' | 'highlight';
+type BlockType = 'title' | 'paragraph' | 'image' | 'media' | 'quote' | 'highlight';
 
 // For local state, dnd requires a string id
 interface Block {
@@ -76,7 +76,7 @@ export default function Admin() {
       const formData = new FormData();
       formData.append('file', file);
 
-      showFeedback('Uploading image...');
+      showFeedback('Uploading media...');
       const response = await fetch('/api/files', {
         method: 'POST',
         body: formData,
@@ -85,9 +85,9 @@ export default function Admin() {
       if (response.ok) {
         const { url } = await response.json();
         handleBlockChange(id, url, undefined);
-        showFeedback('Image uploaded successfully!');
+        showFeedback('Media uploaded successfully!');
       } else {
-        showFeedback('Failed to upload image.');
+                  showFeedback('Failed to upload media.');
       }
     }
   };
@@ -176,13 +176,14 @@ export default function Admin() {
                                                         <option value="title">Title</option>
                                                         <option value="paragraph">Paragraph</option>
                                                         <option value="image">Image</option>
+                                                        <option value="media">Media</option>
                                                         <option value="quote">Quote</option>
                                                         <option value="highlight">Highlight</option>
                                                     </select>
                                                     <button type="button" onClick={() => removeBlock(block.id)} className="text-red-500 hover:text-red-700">Remove</button>
                                                 </div>
-                                                {block.block_type === 'image' ? (
-                                                    <ImageEditor
+                                                {(block.block_type === 'media' || block.block_type === 'image') ? (
+                                                    <MediaEditor
                                                         content={block.content}
                                                         formatting={block.formatting || {}}
                                                         onChange={(content, formatting) => handleBlockChange(block.id, content, formatting)}

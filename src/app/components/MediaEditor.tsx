@@ -3,14 +3,14 @@
 import { useState } from 'react';
 import { TextFormatting } from './RichTextEditor';
 
-interface ImageEditorProps {
+interface MediaEditorProps {
   content: string;
   formatting: TextFormatting;
   onChange: (content: string, formatting: TextFormatting) => void;
   onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function ImageEditor({ content, formatting, onChange, onFileChange }: ImageEditorProps) {
+export default function MediaEditor({ content, formatting, onChange, onFileChange }: MediaEditorProps) {
   const [localFormatting, setLocalFormatting] = useState<TextFormatting>(formatting);
 
   const handleFormattingChange = (newFormatting: Partial<TextFormatting>) => {
@@ -30,39 +30,102 @@ export default function ImageEditor({ content, formatting, onChange, onFileChang
     { label: 'X-Large (800px)', value: '800px' },
   ];
 
-  return (
-    <div className="space-y-4">
-      {/* File Upload */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Upload Image</label>
-        <input
-          type="file"
-          onChange={onFileChange}
-          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100"
-          accept="image/*"
-        />
-      </div>
+  const getFileType = (url: string): 'image' | 'video' | 'audio' | null => {
+    if (!url) return null;
+    const extension = url.split('.').pop()?.toLowerCase();
+    
+    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg'];
+    const videoExtensions = ['mp4', 'avi', 'mov', 'wmv', 'flv', 'webm', 'mkv'];
+    const audioExtensions = ['mp3', 'wav', 'ogg', 'aac', 'flac', 'm4a'];
+    
+    if (imageExtensions.includes(extension || '')) return 'image';
+    if (videoExtensions.includes(extension || '')) return 'video';
+    if (audioExtensions.includes(extension || '')) return 'audio';
+    
+    return null;
+  };
 
-      {/* Image Preview */}
-      {content && (
-        <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-          <div className="text-sm font-medium text-gray-700 mb-2">Preview</div>
+  const renderMediaPreview = () => {
+    if (!content) return null;
+    
+    const fileType = getFileType(content);
+    const style = {
+      width: localFormatting.imageWidth || 'auto',
+      height: localFormatting.imageHeight || 'auto',
+    };
+
+    switch (fileType) {
+      case 'image':
+        return (
           <img
             src={content}
             alt="preview"
             className="max-h-40 rounded-md mx-auto"
-            style={{
-              width: localFormatting.imageWidth || 'auto',
-              height: localFormatting.imageHeight || 'auto',
-            }}
+            style={style}
           />
+        );
+      case 'video':
+        return (
+          <video
+            src={content}
+            controls
+            className="max-h-40 rounded-md mx-auto"
+            style={style}
+          >
+            Your browser does not support the video tag.
+          </video>
+        );
+      case 'audio':
+        return (
+          <audio
+            src={content}
+            controls
+            className="w-full"
+          >
+            Your browser does not support the audio tag.
+          </audio>
+        );
+      default:
+        return (
+          <div className="text-gray-500 text-center py-4">
+            <p>Unsupported file type</p>
+            <p className="text-sm">URL: {content}</p>
+          </div>
+        );
+    }
+  };
+
+  const fileType = getFileType(content);
+  const showSizeControls = fileType === 'image' || fileType === 'video';
+
+  return (
+    <div className="space-y-4">
+      {/* File Upload */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">Upload Media</label>
+        <input
+          type="file"
+          onChange={onFileChange}
+          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100"
+          accept="image/*,video/*,audio/*"
+        />
+        <p className="text-xs text-gray-500 mt-1">
+          Supported formats: Images (JPG, PNG, GIF, etc.), Videos (MP4, MOV, AVI, etc.), Audio (MP3, WAV, etc.)
+        </p>
+      </div>
+
+      {/* Media Preview */}
+      {content && (
+        <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+          <div className="text-sm font-medium text-gray-700 mb-2">Preview</div>
+          {renderMediaPreview()}
         </div>
       )}
 
-      {/* Size Controls */}
-      {content && (
+      {/* Size Controls - Only for Images and Videos */}
+      {content && showSizeControls && (
         <div className="bg-gray-50 p-4 rounded-lg border space-y-3">
-          <div className="text-sm font-medium text-gray-700">Image Size</div>
+          <div className="text-sm font-medium text-gray-700">Media Size</div>
           
           {/* Preset Sizes */}
           <div>
