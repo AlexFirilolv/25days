@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gradient-to-tr from-pink-300 via-yellow-200 to-orange-300 text-gray-800 min-h-screen;
+  @apply bg-gradient-to-tr from-primary-300 via-yellow-200 to-orange-300 text-gray-800 min-h-screen;
 }

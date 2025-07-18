@@ -158,7 +158,7 @@ export default function RichTextEditor({
             <select
               value={localFormatting.fontFamily || ''}
               onChange={(e) => handleFormattingChange({ fontFamily: e.target.value })}
-              className="w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500"
+              className="w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
             >
               {fontFamilies.map((font) => (
                 <option key={font.value} value={font.value} style={{ fontFamily: font.value }}>
@@ -174,7 +174,7 @@ export default function RichTextEditor({
               value={localFormatting.fontSize || ''}
               onChange={(e) => handleFormattingChange({ fontSize: e.target.value })}
               placeholder="e.g. 16px, 1.2rem"
-              className="w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500"
+              className="w-full text-sm rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
             />
           </div>
         </div>
@@ -186,7 +186,7 @@ export default function RichTextEditor({
             onClick={toggleBold}
             className={`px-3 py-1 text-sm font-bold rounded ${
               localFormatting.fontWeight === 'bold'
-                ? 'bg-pink-500 text-white'
+                ? 'bg-primary-500 text-white'
                 : 'bg-white border border-gray-300 hover:bg-gray-50'
             }`}
           >
@@ -197,7 +197,7 @@ export default function RichTextEditor({
             onClick={toggleItalic}
             className={`px-3 py-1 text-sm italic rounded ${
               localFormatting.fontStyle === 'italic'
-                ? 'bg-pink-500 text-white'
+                ? 'bg-primary-500 text-white'
                 : 'bg-white border border-gray-300 hover:bg-gray-50'
             }`}
           >
@@ -208,7 +208,7 @@ export default function RichTextEditor({
             onClick={toggleUnderline}
             className={`px-3 py-1 text-sm underline rounded ${
               localFormatting.textDecoration === 'underline'
-                ? 'bg-pink-500 text-white'
+                ? 'bg-primary-500 text-white'
                 : 'bg-white border border-gray-300 hover:bg-gray-50'
             }`}
           >
@@ -226,7 +226,7 @@ export default function RichTextEditor({
               onClick={() => handleFormattingChange({ textAlign: align as any })}
               className={`px-3 py-1 text-sm rounded capitalize ${
                 localFormatting.textAlign === align
-                  ? 'bg-pink-500 text-white'
+                  ? 'bg-primary-500 text-white'
                   : 'bg-white border border-gray-300 hover:bg-gray-50'
               }`}
             >
@@ -248,7 +248,7 @@ export default function RichTextEditor({
               onClick={() => handleFormattingChange({ direction: dir.value as any })}
               className={`px-3 py-1 text-sm rounded ${
                 localFormatting.direction === dir.value
-                  ? 'bg-pink-500 text-white'
+                  ? 'bg-primary-500 text-white'
                   : 'bg-white border border-gray-300 hover:bg-gray-50'
               }`}
             >
@@ -394,7 +394,7 @@ export default function RichTextEditor({
         placeholder={placeholder}
         rows={rows}
         style={textStyle}
-        className="w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 resize-none"
+        className="w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 resize-none"
       />
     </div>
   );

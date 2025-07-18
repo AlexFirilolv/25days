@@ -52,7 +52,7 @@ export default function MemoryPage() {
             <h1 className="text-3xl font-bold text-gray-700 mb-2">Memory Locked</h1>
             <p className="text-gray-600">This memory isn't unlocked yet. Come back when it's time!</p>
           </div>
-          <Link href="/" className="inline-block bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-300">
+          <Link href="/" className="inline-block bg-primary-500 hover:bg-primary-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-300">
             &larr; Back to Calendar
           </Link>
         </div>
@@ -71,7 +71,7 @@ export default function MemoryPage() {
   return (
     <main className="flex min-h-screen flex-col items-center p-6 sm:p-12">
       <div className="w-full max-w-4xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl p-6 sm:p-10">
-        <Link href="/" className="text-pink-500 hover:text-pink-700 transition-colors duration-300 font-semibold">
+                    <Link href="/" className="text-primary-500 hover:text-primary-700 transition-colors duration-300 font-semibold">
           &larr; Back to Calendar
         </Link>
         

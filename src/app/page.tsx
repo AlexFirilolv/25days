@@ -3,14 +3,25 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+interface Block {
+  id: number;
+  memory_id: number;
+  block_type: 'title' | 'paragraph' | 'image' | 'media' | 'quote' | 'highlight';
+  content: string;
+  formatting: any;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
 interface Memory {
   id: number;
   day_number: number;
   release_date: string;
-  title: string;
-  text_content: string;
-  media_url: string;
-  media_type: 'image' | 'video' | 'audio';
+  display_settings: any;
+  created_at: string;
+  updated_at: string;
+  blocks: Block[];
 }
 
 export default function Home() {
@@ -37,6 +48,10 @@ export default function Home() {
         {Array.from({ length: 25 }, (_, i) => i + 1).map((day) => {
           const memory = memories.find((m) => m.day_number === day);
           const isReleased = memory ? new Date(memory.release_date) <= today : false;
+          
+          // Extract title from the first title block
+          const titleBlock = memory?.blocks?.find(block => block.block_type === 'title');
+          const title = titleBlock?.content || `Day ${day}`;
 
           return (
             <Link
@@ -48,11 +63,11 @@ export default function Home() {
                   : 'bg-white/30 backdrop-blur-sm cursor-not-allowed'
               }`}
             >
-              <h2 className="text-4xl font-bold text-pink-500" style={{ fontFamily: 'Dancing Script, cursive' }}>
+              <h2 className="text-4xl font-bold text-primary-500" style={{ fontFamily: 'Dancing Script, cursive' }}>
                 Day {day}
               </h2>
               <p className="text-sm text-gray-600 mt-2 text-center">
-                {isReleased ? memory?.title : 'Locked'}
+                {isReleased ? title : 'Locked'}
               </p>
               {!isReleased && (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

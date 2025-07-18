@@ -148,7 +148,7 @@ export const BlockRenderer = ({ block, settings = {} }: { block: Block, settings
         };
         return (
           <blockquote 
-            className="border-l-4 border-pink-300 pl-4 my-6" 
+            className="border-l-4 border-primary-300 pl-4 my-6" 
             style={{ ...quoteDefaultStyle, ...style }}
           >
             {block.content}

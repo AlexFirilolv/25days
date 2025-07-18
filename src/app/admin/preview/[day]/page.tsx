@@ -54,7 +54,7 @@ export default function PreviewPage() {
   return (
     <main className="flex min-h-screen flex-col items-center p-6 sm:p-12">
       <div className="w-full max-w-4xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-2xl p-6 sm:p-10">
-        <Link href="/admin" className="text-pink-500 hover:text-pink-700 transition-colors duration-300 font-semibold">
+                  <Link href="/admin" className="text-primary-500 hover:text-primary-700 transition-colors duration-300 font-semibold">
           &larr; Back to Editor
         </Link>
         <div className="mt-4">

@@ -21,9 +21,9 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_DATABASE: our25days
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: 25days
+      MYSQL_USER: 25days
+      MYSQL_PASSWORD: MyGFHitsMe25!
       MYSQL_ROOT_PASSWORD: rootpassword
     ports:
       - '3306:3306'

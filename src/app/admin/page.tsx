@@ -144,7 +144,7 @@ export default function Admin() {
                 Admin Panel
             </h1>
             <div className="mb-6 text-center">
-                <Link href="/" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+                <Link href="/" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
                     Go to Calendar
                 </Link>
             </div>
@@ -155,7 +155,7 @@ export default function Admin() {
                       id="day"
                       value={day}
                       onChange={(e) => setDay(parseInt(e.target.value))}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm"
                   >
                       {Array.from({ length: 25 }, (_, i) => i + 1).map((d) => (
                       <option key={d} value={d}>Day {d}</option>
@@ -172,7 +172,7 @@ export default function Admin() {
                                         {(provided) => (
                                             <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
                                                 <div className="flex items-center justify-between mb-2">
-                                                    <select value={block.block_type} onChange={(e) => handleBlockTypeChange(block.id, e.target.value as BlockType)} className="rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 sm:text-sm">
+                                                    <select value={block.block_type} onChange={(e) => handleBlockTypeChange(block.id, e.target.value as BlockType)} className="rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
                                                         <option value="title">Title</option>
                                                         <option value="paragraph">Paragraph</option>
                                                         <option value="image">Image</option>
@@ -208,11 +208,11 @@ export default function Admin() {
                     </Droppable>
                 </DragDropContext>
 
-                <button type="button" onClick={addBlock} className="w-full inline-flex justify-center rounded-md border-2 border-dashed border-gray-300 py-2 px-4 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
+                <button type="button" onClick={addBlock} className="w-full inline-flex justify-center rounded-md border-2 border-dashed border-gray-300 py-2 px-4 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
                     Add Block
                 </button>
 
-                <button type="submit" className="w-full inline-flex justify-center rounded-md border border-transparent bg-pink-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition-colors">
+                <button type="submit" className="w-full inline-flex justify-center rounded-md border border-transparent bg-primary-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors">
                     Save Memory
                 </button>
             </form>
