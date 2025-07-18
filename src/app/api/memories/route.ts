@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import mysql from 'mysql2/promise';
+import { createDatabaseConnection } from '@/utils/database';
 
 interface Block {
   block_type: 'title' | 'paragraph' | 'image' | 'quote' | 'highlight';
@@ -15,7 +16,7 @@ interface DisplaySettings {
 export async function POST(request: NextRequest) {
   try {
     const { day, blocks, settings }: { day: string; blocks: Block[]; settings?: DisplaySettings } = await request.json();
-    const connection = await mysql.createConnection(process.env.DATABASE_URL!);
+    const connection = await createDatabaseConnection();
     
     // Get memory ID
     const [memoryRows]: any = await connection.execute('SELECT id FROM memories WHERE day_number = ?', [day]);
@@ -53,9 +54,13 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    const connection = await mysql.createConnection(process.env.DATABASE_URL!);
-    await connection.rollback();
-    await connection.end();
+    try {
+      const connection = await createDatabaseConnection();
+      await connection.rollback();
+      await connection.end();
+    } catch (rollbackError) {
+      console.error('Error during rollback:', rollbackError);
+    }
     const err = error as Error;
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
@@ -63,7 +68,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    const connection = await mysql.createConnection(process.env.DATABASE_URL!);
+    const connection = await createDatabaseConnection();
     const [memories]: any = await connection.execute('SELECT * FROM memories ORDER BY day_number ASC');
     
     for (const memory of memories) {

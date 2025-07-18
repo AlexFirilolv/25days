@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import mysql, { RowDataPacket } from 'mysql2/promise';
+import { createDatabaseConnection } from '@/utils/database';
 
 interface MemoryRow extends RowDataPacket {
     day_number: number;
@@ -16,7 +17,7 @@ export async function GET(request: Request, { params }: { params: { day: string 
     const url = new URL(request.url);
     const isPreview = url.searchParams.get('preview') === 'true';
     
-    const connection = await mysql.createConnection(process.env.DATABASE_URL!);
+    const connection = await createDatabaseConnection();
     const [rows] = await connection.execute<MemoryRow[]>(
       `SELECT m.day_number, m.release_date, m.display_settings, mb.block_type, mb.content, mb.formatting, mb.sort_order
        FROM memories m
