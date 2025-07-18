@@ -39,7 +39,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center p-12 font-sans">
       <header className="w-full max-w-5xl text-center mb-12">
         <h1 className="text-6xl font-bold text-white drop-shadow-lg" style={{ fontFamily: 'Dancing Script, cursive' }}>
-          Our 25 Days of Summer
+        A trip down memory lane
         </h1>
         <p className="text-xl text-white/90 mt-4">A collection of our most cherished memories.</p>
       </header>
